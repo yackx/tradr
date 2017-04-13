@@ -1,0 +1,35 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.10'
+    compile 'org.codehaus.gpars:gpars:1.2.1'
+    compile 'ch.qos.logback:logback-classic:1.2.2'
+    testCompile 'junit:junit:4.12'
+    testCompile "org.spockframework:spock-core:1.1-groovy-2.4-rc-3"
+}
+
+task aggregate(type: JavaExec) {
+    description 'Aggregate JSON data into CSV'
+
+    main = 'net.ackx.tradr.RawData'
+    args 'data'
+
+    classpath = sourceSets.main.runtimeClasspath
+    classpath += sourceSets.main.resources
+}
+
+task simulate(type: JavaExec) {
+    description 'Simulate tradding'
+
+    main = 'net.ackx.tradr.Simulation'
+    args 'data/stock-history.csv'
+
+    // Set classpath for running the Groovy script.
+    classpath = sourceSets.main.runtimeClasspath
+    classpath += sourceSets.main.resources
+}
