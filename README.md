@@ -1,4 +1,4 @@
-# Trdr
+# tradr
 
 A feeble and vain attempt to perform automated trading, and get rich.
 
